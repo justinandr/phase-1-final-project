@@ -1,12 +1,11 @@
 window.addEventListener('DOMContentLoaded', () => initialRender())
 
 function initialRender(){
-    fetch('http://acnhapi.com/v1/songs')
+    fetch('http://acnhapi.com/v1a/songs')
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('tracklist')
-
-        for (const x in data){
+        data.forEach(e => {
             const trackContainer = document.createElement('div')
             const imgContainer = document.createElement('div')
             const titleContainer = document.createElement('div')
@@ -17,10 +16,10 @@ function initialRender(){
             imgContainer.className = 'img-container'
             titleContainer.className = 'title-container'
             playButton.className = 'play-button'
-            playButton.id = data[x].id
+            playButton.id = e.id
             img.className = 'album-art'
-            titleContainer.textContent = data[x].name['name-USen']
-            img.src = data[x].image_uri
+            titleContainer.textContent = e.name['name-USen']
+            img.src = e.image_uri
             playButton.textContent = 'Play ▶️'
 
             playButton.addEventListener('click', handlePlayButtonClick)
@@ -28,7 +27,7 @@ function initialRender(){
             imgContainer.appendChild(img)
             trackContainer.append(imgContainer, titleContainer, playButton)
             container.appendChild(trackContainer)
-        }
+        });
     })
 
 }

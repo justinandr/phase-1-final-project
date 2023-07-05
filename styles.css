@@ -1,15 +1,15 @@
 .track-container {
     display: grid;
     align-items: center; 
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 100px 700px 1fr;
     column-gap: 5px;
     border: 1px solid grey;
     padding: 1px;
 }
 
 .album-art {
-    height: 15%;
-    width: 15%;
+    height: 50px;
+    width: 50px;
     vertical-align: middle;
 }
 
@@ -19,5 +19,5 @@
 
 .play-button {
     width: 50%;
-    
+    float: right;
 }
