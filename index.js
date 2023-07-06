@@ -1,10 +1,35 @@
-window.addEventListener('DOMContentLoaded', () => initialRender())
+window.addEventListener('DOMContentLoaded', () => {
+    initialRender()
+
+})
 
 function initialRender(){
     fetch('http://acnhapi.com/v1a/songs')
     .then(res => res.json())
     .then(data => {
-        const container = document.getElementById('tracklist')
+        const listContainer = document.getElementById('tracklist')
+
+        const playerContainer = document.getElementById('player-div')
+        const fig = document.createElement('figure')
+        const figcap = document.createElement('figcaption')
+        const audio = document.createElement('audio')
+        const albumArt = document.createElement('img')
+
+        playerContainer.className = 'center'
+        fig.className = 'center'
+        figcap.className = 'center'
+        audio.className = 'center'
+        albumArt.className = 'center'
+        audio.controls = true
+        audio.id = 'player'
+        audio.src = data[0]['music_uri']
+        figcap.textContent = data[0].name['name-USen']
+        albumArt.src = data[0]['image_uri']
+        
+        fig.append(figcap, audio)
+        playerContainer.append(albumArt, fig)
+
+
         data.forEach(e => {
             const trackContainer = document.createElement('div')
             const imgContainer = document.createElement('div')
@@ -26,7 +51,7 @@ function initialRender(){
 
             imgContainer.appendChild(img)
             trackContainer.append(imgContainer, titleContainer, playButton)
-            container.appendChild(trackContainer)
+            listContainer.appendChild(trackContainer)
         });
     })
 

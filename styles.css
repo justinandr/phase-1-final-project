@@ -21,3 +21,10 @@
     width: 50%;
     float: right;
 }
+
+.center {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    justify-content: center;
+}
