@@ -41,10 +41,10 @@ function initialRender(){
 function handlePlayButtonClick(e){
     fetch(`http://acnhapi.com/v1a/songs/${e.target.id}`)
     .then(res => res.json())
-    .then(data => updatePlayer(data))
+    .then(data => updatePlayer(data, true))
 }
 
-function updatePlayer(song){
+function updatePlayer(song, autoPlay = false){
     const playerContainer = document.getElementById('player-div')
 
     playerContainer.innerHTML = ''
@@ -58,6 +58,7 @@ function updatePlayer(song){
     fig.className = 'center'
     figcap.className = 'center'
     audio.className = 'center'
+    audio.autoplay = autoPlay
     albumArt.className = 'center'
     audio.controls = true
     audio.id = 'player'
