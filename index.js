@@ -47,6 +47,8 @@ function handlePlayButtonClick(e){
 function updatePlayer(song){
     const playerContainer = document.getElementById('player-div')
 
+    playerContainer.innerHTML = ''
+
     const fig = document.createElement('figure')
     const figcap = document.createElement('figcaption')
     const audio = document.createElement('audio')
