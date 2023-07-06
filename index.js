@@ -9,26 +9,7 @@ function initialRender(){
     .then(data => {
         const listContainer = document.getElementById('tracklist')
 
-        const playerContainer = document.getElementById('player-div')
-        const fig = document.createElement('figure')
-        const figcap = document.createElement('figcaption')
-        const audio = document.createElement('audio')
-        const albumArt = document.createElement('img')
-
-        playerContainer.className = 'center'
-        fig.className = 'center'
-        figcap.className = 'center'
-        audio.className = 'center'
-        albumArt.className = 'center'
-        audio.controls = true
-        audio.id = 'player'
-        audio.src = data[0]['music_uri']
-        figcap.textContent = data[0].name['name-USen']
-        albumArt.src = data[0]['image_uri']
-        
-        fig.append(figcap, audio)
-        playerContainer.append(albumArt, fig)
-
+        updatePlayer(data[0])
 
         data.forEach(e => {
             const trackContainer = document.createElement('div')
@@ -60,5 +41,28 @@ function initialRender(){
 function handlePlayButtonClick(e){
     fetch(`http://acnhapi.com/v1a/songs/${e.target.id}`)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => updatePlayer(data))
+}
+
+function updatePlayer(song){
+    const playerContainer = document.getElementById('player-div')
+
+    const fig = document.createElement('figure')
+    const figcap = document.createElement('figcaption')
+    const audio = document.createElement('audio')
+    const albumArt = document.createElement('img')
+
+    playerContainer.className = 'center'
+    fig.className = 'center'
+    figcap.className = 'center'
+    audio.className = 'center'
+    albumArt.className = 'center'
+    audio.controls = true
+    audio.id = 'player'
+    audio.src = song['music_uri']
+    figcap.textContent = song.name['name-USen']
+    albumArt.src = song['image_uri']
+        
+    fig.append(figcap, audio)
+    playerContainer.append(albumArt, fig)
 }
