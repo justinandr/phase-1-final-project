@@ -58,5 +58,7 @@ function initialRender(){
 }
 
 function handlePlayButtonClick(e){
-    console.log(e)
+    fetch(`http://acnhapi.com/v1a/songs/${e.target.id}`)
+    .then(res => res.json())
+    .then(data => console.log(data))
 }
