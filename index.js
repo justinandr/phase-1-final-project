@@ -23,7 +23,8 @@ function updatePage(lang = 'name-USen'){
             trackContainer.className = 'track-container'
             imgContainer.className = 'img-container'
             titleContainer.className = 'title-container'
-            playButton.className = 'play-button'
+            playButton.classList.add('play-button')
+            playButton.classList.add(lang)
             playButton.id = e.id
             img.className = 'album-art'
             titleContainer.textContent = e.name[lang]
@@ -43,7 +44,7 @@ function updatePage(lang = 'name-USen'){
 function handlePlayButtonClick(e){
     fetch(`http://acnhapi.com/v1a/songs/${e.target.id}`)
     .then(res => res.json())
-    .then(data => updatePlayer(data, true))
+    .then(data => updatePlayer(data, true, e.target.classList[1]))
 }
 
 function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
