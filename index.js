@@ -11,7 +11,7 @@ function updatePage(lang = 'name-USen'){
         const listContainer = document.getElementById('tracklist')
         listContainer.innerHTML = ''
 
-        updatePlayer(data[0], false, lang)
+        updatePlayer(data[94], false, lang)
 
         data.forEach(e => {
             const trackContainer = document.createElement('div')
