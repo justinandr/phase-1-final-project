@@ -1,15 +1,17 @@
 window.addEventListener('DOMContentLoaded', () => {
-    initialRender()
+    updatePage()
 
+    document.getElementById('language').addEventListener('change', updateLanguage)
 })
 
-function initialRender(){
+function updatePage(lang = 'name-USen'){
     fetch('http://acnhapi.com/v1a/songs')
     .then(res => res.json())
     .then(data => {
         const listContainer = document.getElementById('tracklist')
+        listContainer.innerHTML = ''
 
-        updatePlayer(data[0])
+        updatePlayer(data[0], false, lang)
 
         data.forEach(e => {
             const trackContainer = document.createElement('div')
@@ -24,7 +26,7 @@ function initialRender(){
             playButton.className = 'play-button'
             playButton.id = e.id
             img.className = 'album-art'
-            titleContainer.textContent = e.name['name-USen']
+            titleContainer.textContent = e.name[lang]
             img.src = e.image_uri
             playButton.textContent = 'Play ▶️'
 
@@ -44,9 +46,8 @@ function handlePlayButtonClick(e){
     .then(data => updatePlayer(data, true))
 }
 
-function updatePlayer(song, autoPlay = false){
+function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
     const playerContainer = document.getElementById('player-div')
-
     playerContainer.innerHTML = ''
 
     const fig = document.createElement('figure')
@@ -63,9 +64,13 @@ function updatePlayer(song, autoPlay = false){
     audio.controls = true
     audio.id = 'player'
     audio.src = song['music_uri']
-    figcap.textContent = song.name['name-USen']
+    figcap.textContent = song.name[lang]
     albumArt.src = song['image_uri']
         
     fig.append(figcap, audio)
     playerContainer.append(albumArt, fig)
+}
+
+function updateLanguage(e){
+    updatePage(e.target.value)
 }

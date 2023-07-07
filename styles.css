@@ -1,10 +1,12 @@
 .track-container {
     display: grid;
-    align-items: center; 
-    grid-template-columns: 100px 700px 1fr;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
     column-gap: 5px;
-    border: 1px solid grey;
-    padding: 1px;
+    padding: 5px;
+    padding-left: 200px;
+    padding-right: 200px;
 }
 
 .album-art {
@@ -18,8 +20,7 @@
 }
 
 .play-button {
-    width: 50%;
-    float: right;
+    width: 25%;
 }
 
 .center {
