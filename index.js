@@ -12,7 +12,6 @@ function updatePage(lang = 'name-USen'){
         listContainer.innerHTML = ''
 
         updatePlayer(data[94], false, lang)
-        let trackNumber = 1
 
         data.forEach(e => {
             const trackContainer = document.createElement('div')
@@ -29,7 +28,7 @@ function updatePage(lang = 'name-USen'){
             playButton.classList.add(lang)
             playButton.id = e.id
             img.className = 'album-art'
-            titleContainer.textContent = `${trackNumber}. ${e.name[lang]}`
+            titleContainer.textContent = `${e.id}. ${e.name[lang]}`
             img.src = e.image_uri
             playButton.textContent = 'Play ▶️'
 
@@ -38,7 +37,6 @@ function updatePage(lang = 'name-USen'){
             imgContainer.appendChild(img)
             trackContainer.append(imgContainer, titleContainer, playButton)
             listContainer.appendChild(trackContainer)
-            trackNumber++
         });
     })
 
