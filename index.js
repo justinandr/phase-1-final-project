@@ -57,17 +57,13 @@ function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
     const audio = document.createElement('audio')
     const albumArt = document.createElement('img')
 
-    playerContainer.className = 'center'
-    fig.className = 'center'
-    figcap.className = 'center'
-    audio.className = 'center'
     audio.autoplay = autoPlay
-    albumArt.className = 'center'
     audio.controls = true
     audio.id = 'player'
     audio.src = song['music_uri']
     figcap.textContent = song.name[lang]
     albumArt.src = song['image_uri']
+    albumArt.className = 'center'
         
     fig.append(figcap, audio)
     playerContainer.append(albumArt, fig)
