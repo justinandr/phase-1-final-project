@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
     updatePage()
-
     document.getElementById('language').addEventListener('change', updateLanguage)
 })
 
@@ -33,9 +32,12 @@ function updatePage(lang = 'name-USen'){
             playButton.textContent = 'Play ▶️'
 
             playButton.addEventListener('click', handlePlayButtonClick)
+            
 
             imgContainer.appendChild(img)
-            trackContainer.append(imgContainer, titleContainer, playButton)
+            trackContainer.appendChild(imgContainer)
+            trackContainer.appendChild(titleContainer)
+            trackContainer.appendChild(playButton)
             listContainer.appendChild(trackContainer)
         });
     })
@@ -57,6 +59,7 @@ function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
     const audio = document.createElement('audio')
     const albumArt = document.createElement('img')
 
+    playerContainer.className = 'center'
     audio.autoplay = autoPlay
     audio.controls = true
     audio.id = 'player'
