@@ -7,4 +7,19 @@ This is a single page web-application that utilizes the /songs endpoint of an An
 In the top left you will find a drop down menu to select your language. The two main parts of this program are the music player and the tracklist. 
 Select the track you would like to hear by pressing the play button on that track and enjoy!
 
+## Installation
+
+Clone this repository and save to your local environment
+
+## Executing Program
+
+Open index.html by either:
+
+- opening the file from your file explorer
+- pasting the file's path into your browser's address bar
+- navigating to the directory where it is saved in your terminal and using 
+'''
+open index.html
+'''
+
 ![](./assets/language-functionality.gif)
