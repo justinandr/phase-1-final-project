@@ -21,7 +21,19 @@ Open index.html by either:
 ```
 open index.html
 ```
+## Functionality
+
+Language selection functionality: 
 
 ![Language selection functionality](./assets/language-functionality.gif)
 
+
+Track selection functionality: 
+
 ![Track selection functionality](./assets/track-selection.gif)
+
+
+## Acknowledgments 
+
+- [Animal Crossing New Horizons API](https://acnhapi.com/doc) created by Alexis#8717 (Discord)
+- Eric Gaspar for inspiration and encouragement
