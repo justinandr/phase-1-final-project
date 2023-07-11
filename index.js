@@ -3,6 +3,13 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('language').addEventListener('change', updateLanguage)
 })
 
+
+// The updatePage function accepts one parameter for language and is 
+// called in two instances during the execution of this program. 
+// 1. When the DOMContentLoaded event triggers
+// 2. When the user selects a different language from the dropdown
+// It fetches the data for all songs as an array then iterates over
+// that data to update the DOM with the tracklist 
 function updatePage(lang = 'name-USen'){
     fetch('http://acnhapi.com/v1a/songs')
     .then(res => res.json())
@@ -44,12 +51,20 @@ function updatePage(lang = 'name-USen'){
 
 }
 
+// The handlePlayButtonClick is an event handler for when the play button
+// on a track was clicked. The play button's id matches that of it's associate
+// song so the correct song's data can be retrieved. That data is then passed 
+// to the updatePlayer function along with a true value for the autoplay parameter
+// and the current selected language.
 function handlePlayButtonClick(e){
     fetch(`http://acnhapi.com/v1a/songs/${e.target.id}`)
     .then(res => res.json())
     .then(data => updatePlayer(data, true, e.target.classList[1]))
 }
 
+// The updatePlayer function accepts three parameters: song, autoplay and lang.
+// It takes that data and updates the DOM with the album art, title of the song
+// an loads the src of the song into the auido element
 function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
     const playerContainer = document.getElementById('player-div')
     playerContainer.innerHTML = ''
@@ -75,10 +90,16 @@ function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
     audio.addEventListener('ended', playNextTrack)
 }
 
+// The updateLanguage function is an event handler for when the language
+// selection is changed in the dropdown menu. It takes that value and 
+// passes it to the updatePage function to update the tracklist accordingly.
 function updateLanguage(e){
     updatePage(e.target.value)
 }
 
+// The playNextTrack is an event handler for the 'ended' event added to the
+// audio HTML element. When the song ends, this function checks the track
+// number agains the the total tracks and plays the next song automatically. 
 function playNextTrack(e){
     let trackNumber = e.target.id
 
