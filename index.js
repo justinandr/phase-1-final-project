@@ -62,7 +62,8 @@ function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
     playerContainer.className = 'center'
     audio.autoplay = autoPlay
     audio.controls = true
-    audio.id = 'player'
+    audio.id = `${song.id}`
+    audio.className = lang
     audio.src = song['music_uri']
     figcap.textContent = song.name[lang]
     albumArt.src = song['image_uri']
@@ -70,8 +71,23 @@ function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
         
     fig.append(figcap, audio)
     playerContainer.append(albumArt, fig)
+
+    audio.addEventListener('ended', playNextTrack)
 }
 
 function updateLanguage(e){
     updatePage(e.target.value)
+}
+
+function playNextTrack(e){
+    let trackNumber = e.target.id
+
+    if (trackNumber < 95){
+        trackNumber++
+    }
+    else trackNumber = 1
+
+    fetch(`http://acnhapi.com/v1a/songs/${trackNumber}`)
+    .then(res => res.json())
+    .then (data => updatePlayer(data, true, e.target.className))
 }
