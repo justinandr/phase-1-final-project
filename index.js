@@ -15,24 +15,28 @@ function updatePage(lang = 'name-USen'){
     .then(res => res.json())
     .then(data => {
         const listContainer = document.getElementById('tracklist')
-        listContainer.innerHTML = ''
+        listContainer.innerHTML = '' // Important for avoiding duplicate data on the page
 
+        // Loads 'Welcome Horizons' as default song
         updatePlayer(data[94], false, lang)
 
+        // Iterates over fetched song data to update DOM with tracklist
         data.forEach(e => {
+            // Creates HTML elements to be appened to the DOM
             const trackContainer = document.createElement('div')
             const imgContainer = document.createElement('div')
             const titleContainer = document.createElement('div')
             const img = document.createElement('img')
             const playButton = document.createElement('button')
 
+            // Adds data to the HTML elements from the data
             trackContainer.className = 'track-container'
             trackContainer.id = e.id
             imgContainer.className = 'img-container'
             titleContainer.className = 'title-container'
             playButton.classList.add('play-button')
-            playButton.classList.add(lang)
-            playButton.id = e.id
+            playButton.classList.add(lang) // Important for language persistence
+            playButton.id = e.id 
             img.className = 'album-art'
             titleContainer.textContent = `${e.id}. ${e.name[lang]}`
             img.src = e.image_uri
@@ -40,7 +44,7 @@ function updatePage(lang = 'name-USen'){
 
             playButton.addEventListener('click', handlePlayButtonClick)
             
-
+            // Appends elements to the DOM
             imgContainer.appendChild(img)
             trackContainer.appendChild(imgContainer)
             trackContainer.appendChild(titleContainer)
@@ -59,6 +63,7 @@ function updatePage(lang = 'name-USen'){
 function handlePlayButtonClick(e){
     fetch(`http://acnhapi.com/v1a/songs/${e.target.id}`)
     .then(res => res.json())
+    // Selected language was added to the classlist of the button to facilitate selected language persistence
     .then(data => updatePlayer(data, true, e.target.classList[1]))
 }
 
@@ -67,13 +72,15 @@ function handlePlayButtonClick(e){
 // an loads the src of the song into the auido element
 function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
     const playerContainer = document.getElementById('player-div')
-    playerContainer.innerHTML = ''
+    playerContainer.innerHTML = '' // Important for avoiding duplicate data on the page
 
+    // Creates HTML elements to be appeneded to the DOM
     const fig = document.createElement('figure')
     const figcap = document.createElement('figcaption')
     const audio = document.createElement('audio')
     const albumArt = document.createElement('img')
 
+    // Adds data to the HTML elements from the data
     playerContainer.className = 'center'
     audio.autoplay = autoPlay
     audio.controls = true
@@ -83,7 +90,8 @@ function updatePlayer(song, autoPlay = false, lang = 'name-USen'){
     figcap.textContent = song.name[lang]
     albumArt.src = song['image_uri']
     albumArt.className = 'center'
-        
+     
+    // Appends elements the DOM
     fig.append(figcap, audio)
     playerContainer.append(albumArt, fig)
 
@@ -103,11 +111,13 @@ function updateLanguage(e){
 function playNextTrack(e){
     let trackNumber = e.target.id
 
+    // Adds logic to autoplay the first track after the last has ended
     if (trackNumber < 95){
         trackNumber++
     }
     else trackNumber = 1
 
+    // Uses the result of that logic to update the player with the next track
     fetch(`http://acnhapi.com/v1a/songs/${trackNumber}`)
     .then(res => res.json())
     .then (data => updatePlayer(data, true, e.target.className))
