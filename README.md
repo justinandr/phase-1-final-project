@@ -18,8 +18,8 @@ Open index.html by either:
 - opening the file from your file explorer
 - pasting the file's path into your browser's address bar
 - navigating to the directory where it is saved in your terminal and using 
-'''
+```
 open index.html
-'''
+```
 
 ![](./assets/language-functionality.gif)
