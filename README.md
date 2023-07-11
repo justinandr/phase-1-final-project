@@ -22,4 +22,6 @@ Open index.html by either:
 open index.html
 ```
 
-![](./assets/language-functionality.gif)
+![Language selection functionality](./assets/language-functionality.gif)
+
+![Track selection functionality](./assets/track-selection.gif)
