@@ -55,7 +55,7 @@ function playNextTrack(e){
 
     fetch(`http://acnhapi.com/v1a/songs/${trackNumber}`)
     .then(res => res.json())
-    .then (data => updatePlayer(data, true, e.target.className))
+    .then (data => updatePlayer(data, true, e.target.className[1]))
 }
 
 function updateTrackList(songData, lang){
